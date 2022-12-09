@@ -49,7 +49,7 @@
 
             <div class="grid gap-1 max-w-xl mt-2 px-4 py-4 font-mono text-sm rounded-lg">
                 @foreach ($this->user->getRecoveryCodes() as $code)
-                    <div>{{ $code }}</div>
+                    <div>{{ $code['code'] }}</div>
                 @endforeach
             </div>
         @endif

@@ -26,7 +26,7 @@ class TwoFactorAuthenticationForm extends Component implements Forms\Contracts\H
     /**
      * The two factor authentication provider.
      *
-     * @var \Laragear\TwoFactor\Contracts\TwoFactorTotp
+     * @var \Laragear\TwoFactor\Models\TwoFactorAuthentication
      */
     public $totp;
 
@@ -36,11 +36,6 @@ class TwoFactorAuthenticationForm extends Component implements Forms\Contracts\H
      * @var string|null
      */
     public $code;
-
-    public function boot()
-    {
-        $this->twoFactor = app(FilamentTwoFactor::class);
-    }
 
     protected function getFormSchema(): array
     {
