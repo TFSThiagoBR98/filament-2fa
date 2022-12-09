@@ -1,6 +1,6 @@
 <?php
 
-namespace Webbingbrasil\FilamentTwoFactor\Http\Livewire;
+namespace TFSThiagoBR98\FilamentTwoFactor\Http\Livewire;
 
 use Filament\Facades\Filament;
 use Filament\Forms;
@@ -8,8 +8,8 @@ use Filament\Pages;
 use Filament\Pages\Actions\ButtonAction;
 use Illuminate\Support\Collection;
 use Livewire\Component;
-use Webbingbrasil\FilamentTwoFactor\ConfirmsPasswords;
-use Webbingbrasil\FilamentTwoFactor\FilamentTwoFactor;
+use TFSThiagoBR98\FilamentTwoFactor\ConfirmsPasswords;
+use TFSThiagoBR98\FilamentTwoFactor\FilamentTwoFactor;
 
 class TwoFactorAuthenticationForm extends Component implements Forms\Contracts\HasForms
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Webbingbrasil\FilamentTwoFactor;
+namespace TFSThiagoBR98\FilamentTwoFactor;
 
 use Filament\Facades\Filament;
 use Illuminate\Validation\ValidationException;

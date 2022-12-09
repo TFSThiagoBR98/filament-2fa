@@ -1,6 +1,6 @@
 <?php
 
-namespace Webbingbrasil\FilamentTwoFactor\Http\Livewire\Auth;
+namespace TFSThiagoBR98\FilamentTwoFactor\Http\Livewire\Auth;
 
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use Filament\Facades\Filament;
@@ -8,8 +8,8 @@ use Filament\Forms\ComponentContainer;
 use Filament\Http\Livewire\Auth\Login as FilamentLogin;
 use Filament\Http\Responses\Auth\Contracts\LoginResponse as FilamentLoginResponse;
 use Illuminate\Auth\Events\Failed;
-use Webbingbrasil\FilamentTwoFactor\FilamentTwoFactor;
-use Webbingbrasil\FilamentTwoFactor\Http\Responses\Auth\LoginResponse as TwoFactorLoginResponse;
+use TFSThiagoBR98\FilamentTwoFactor\FilamentTwoFactor;
+use TFSThiagoBR98\FilamentTwoFactor\Http\Responses\Auth\LoginResponse as TwoFactorLoginResponse;
 
 /**
  * @property ComponentContainer $form

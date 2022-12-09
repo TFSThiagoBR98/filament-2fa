@@ -1,6 +1,6 @@
 <?php
 
-namespace Webbingbrasil\FilamentTwoFactor\Pages;
+namespace TFSThiagoBR98\FilamentTwoFactor\Pages;
 
 use Filament\Pages\Page;
 

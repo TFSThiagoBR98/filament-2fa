@@ -31,7 +31,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Webbingbrasil\\FilamentTwoFactor\\": "src"
+            "TFSThiagoBR98\\FilamentTwoFactor\\": "src"
         }
     },
     "config": {
@@ -40,7 +40,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Webbingbrasil\\FilamentTwoFactor\\FilamentTwoFactorProvider"
+                "TFSThiagoBR98\\FilamentTwoFactor\\FilamentTwoFactorProvider"
             ]
         }
     },

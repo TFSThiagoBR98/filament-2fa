@@ -1,15 +1,15 @@
 <?php
 
-namespace Webbingbrasil\FilamentTwoFactor;
+namespace TFSThiagoBR98\FilamentTwoFactor;
 
 use Filament\Facades\Filament;
 use Filament\Navigation\UserMenuItem;
 use Filament\PluginServiceProvider;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
-use Webbingbrasil\FilamentTwoFactor\Http\Livewire\Auth;
-use Webbingbrasil\FilamentTwoFactor\Http\Livewire\TwoFactorAuthenticationForm;
-use Webbingbrasil\FilamentTwoFactor\Pages\TwoFactor;
+use TFSThiagoBR98\FilamentTwoFactor\Http\Livewire\Auth;
+use TFSThiagoBR98\FilamentTwoFactor\Http\Livewire\TwoFactorAuthenticationForm;
+use TFSThiagoBR98\FilamentTwoFactor\Pages\TwoFactor;
 
 class FilamentTwoFactorProvider extends PluginServiceProvider
 {
@@ -19,8 +19,8 @@ class FilamentTwoFactorProvider extends PluginServiceProvider
     {
         $package->hasRoute('web');
 
-        // Livewire::component(Auth\Login::getName(), Auth\Login::class);
-        // Livewire::component(Auth\TwoFactorChallenge::getName(), Auth\TwoFactorChallenge::class);
+        Livewire::component(Auth\Login::getName(), Auth\Login::class);
+        Livewire::component(Auth\TwoFactorChallenge::getName(), Auth\TwoFactorChallenge::class);
         Livewire::component('filament-two-factor-form', TwoFactorAuthenticationForm::class);
     }
 

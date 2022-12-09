@@ -1,13 +1,13 @@
 <?php
 
-namespace Webbingbrasil\FilamentTwoFactor\Http\Livewire\Auth;
+namespace TFSThiagoBR98\FilamentTwoFactor\Http\Livewire\Auth;
 
 use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Http\Responses\Auth\Contracts\LoginResponse;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
-use Webbingbrasil\FilamentTwoFactor\FilamentTwoFactor;
+use TFSThiagoBR98\FilamentTwoFactor\FilamentTwoFactor;
 
 class TwoFactorChallenge extends Component implements Forms\Contracts\HasForms
 {

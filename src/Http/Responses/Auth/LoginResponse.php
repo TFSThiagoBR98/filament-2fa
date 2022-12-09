@@ -1,6 +1,6 @@
 <?php
 
-namespace Webbingbrasil\FilamentTwoFactor\Http\Responses\Auth;
+namespace TFSThiagoBR98\FilamentTwoFactor\Http\Responses\Auth;
 
 use Filament\Http\Responses\Auth\Contracts\LoginResponse as Responsable;
 use Illuminate\Http\RedirectResponse;

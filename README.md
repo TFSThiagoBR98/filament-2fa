@@ -6,7 +6,7 @@ A Two Factor Authentication plugin for Filament
 
 1. Install the package via composer (requires filament >= 2.10.40)
 ```bash
-composer require webbingbrasil/filament-2fa
+composer require tfsthiagobr98/filament-2fa
 ```
 
 2. Publish assets and run migrations
@@ -23,7 +23,7 @@ php artisan vendor:publish --tag="filament-2fa-config"
 php artisan vendor:publish --tag="filament-2fa-views"
 ```
 
-3. Add `\Webbingbrasil\FilamentTwoFactor\TwoFactorAuthenticatable` trait to your user model.
+3. Add `\TFSThiagoBR98\FilamentTwoFactor\TwoFactorAuthenticatable` trait to your user model.
 
 4. Update the `config/filament.php` to point to the Two Factor Login::class.
 
@@ -32,14 +32,14 @@ php artisan vendor:publish --tag="filament-2fa-views"
     "guard" => env("FILAMENT_AUTH_GUARD", "web"),
     "pages" => [
         "login" =>
-            \Webbingbrasil\FilamentTwoFactor\Http\Livewire\Auth\Login::class,
+            \TFSThiagoBR98\FilamentTwoFactor\Http\Livewire\Auth\Login::class,
     ],
 ],
 ```
 
 ## Integrate With Custom Profile Page
 
-This package has a component for two-factor setup that can be easily added to a profile page, like the one for [filament-jetstream-theme](https://github.com/webbingbrasil/filament-jetstream-theme).
+This package has a component for two-factor setup that can be easily added to a profile page, like the one for [filament-jetstream-theme](https://github.com/tfsthiagobr98/filament-jetstream-theme).
 
 Create a view with the `<livewire:filament-two-factor-form>` component like the example below:
 
