@@ -1,17 +1,22 @@
 {
-    "name": "webbingbrasil/filament-2fa",
+    "name": "tfsthiagobr98/filament-2fa",
     "description": "A 2FA plugin for filament.",
     "keywords": [
         "laravel",
         "filament",
         "2fa"
     ],
-    "homepage": "https://github.com/webbingbrasil/filament-2fa",
+    "homepage": "https://github.com/tfsthiagobr98/filament-2fa",
     "license": "MIT",
     "authors": [
         {
             "name": "Danilo Andrade",
             "email": "danilo@webbingbrasil.com.br",
+            "role": "Developer"
+        },
+        {
+            "name": "Thiago França",
+            "email": "contact@tfs.dev.br",
             "role": "Developer"
         }
     ],
@@ -20,8 +25,7 @@
         "ext-json": "*",
         "spatie/laravel-package-tools": "^1.9.2",
         "filament/filament": "^2.10.40",
-        "bacon/bacon-qr-code": "^2.0",
-        "pragmarx/google2fa": "^7.0|^8.0"
+        "laragear/two-factor": "^1.1"
     },
     "require-dev": {
     },

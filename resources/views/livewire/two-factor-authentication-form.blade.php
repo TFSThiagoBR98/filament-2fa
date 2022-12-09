@@ -26,12 +26,12 @@
             </div>
 
             <div class="mt-2">
-                {!! $this->user->twoFactorQrCodeSvg() !!}
+                {!! $this->totp->toQr() !!}
             </div>
 
             <div class="mt-2 max-w-xl text-sm">
                 <p class="font-semibold">
-                    {{ __('filament-2fa::two-factor.field.setup_key') }}: {{ decrypt($this->user->two_factor_secret) }}
+                    {{ __('filament-2fa::two-factor.field.setup_key') }}: {{ $this->totp->toString() }}
                 </p>
             </div>
 
@@ -48,7 +48,7 @@
             </div>
 
             <div class="grid gap-1 max-w-xl mt-2 px-4 py-4 font-mono text-sm rounded-lg">
-                @foreach (json_decode(decrypt($this->user->two_factor_recovery_codes), true) as $code)
+                @foreach ($this->user->getRecoveryCodes() as $code)
                     <div>{{ $code }}</div>
                 @endforeach
             </div>

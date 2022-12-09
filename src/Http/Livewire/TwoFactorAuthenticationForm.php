@@ -11,7 +11,7 @@ use Livewire\Component;
 use Webbingbrasil\FilamentTwoFactor\ConfirmsPasswords;
 use Webbingbrasil\FilamentTwoFactor\FilamentTwoFactor;
 
-class TwoFactorAuthenticationForm extends Component  implements Forms\Contracts\HasForms
+class TwoFactorAuthenticationForm extends Component implements Forms\Contracts\HasForms
 {
     use Forms\Concerns\InteractsWithForms;
     use ConfirmsPasswords;
@@ -26,9 +26,9 @@ class TwoFactorAuthenticationForm extends Component  implements Forms\Contracts\
     /**
      * The two factor authentication provider.
      *
-     * @var \Webbingbrasil\FilamentTwoFactor\FilamentTwoFactor
+     * @var \Laragear\TwoFactor\Contracts\TwoFactorTotp
      */
-    protected $twoFactor;
+    public $totp;
 
     /**
      * The OTP code for confirming two factor authentication.
@@ -60,12 +60,7 @@ class TwoFactorAuthenticationForm extends Component  implements Forms\Contracts\
     {
         $this->ensurePasswordIsConfirmed();
 
-        $this->user->forceFill([
-            'two_factor_secret' => encrypt($this->twoFactor->generateSecretKey()),
-            'two_factor_recovery_codes' => encrypt(json_encode(Collection::times(8, function () {
-                return $this->twoFactor->generateRecoveryCode();
-            })->all())),
-        ])->save();
+        $this->totp = $this->user->createTwoFactorAuth();
     }
 
     /**
@@ -77,17 +72,13 @@ class TwoFactorAuthenticationForm extends Component  implements Forms\Contracts\
     {
         $this->ensurePasswordIsConfirmed();
 
-        if (empty($this->user->two_factor_secret) ||
-            empty($this->code) ||
-            ! $this->twoFactor->verify(decrypt($this->user->two_factor_secret), $this->code)) {
+        if (empty($this->code) || !$this->user->confirmTwoFactorAuth($this->code)) {
             $this->addError('code', __('filament-2fa::two-factor.message.invalid_code'));
 
             return;
         }
 
-        $this->user->forceFill([
-            'two_factor_confirmed_at' => now(),
-        ])->save();
+        $this->user->getRecoveryCodes();
 
         $this->showingRecoveryCodes = true;
     }
@@ -112,11 +103,7 @@ class TwoFactorAuthenticationForm extends Component  implements Forms\Contracts\
     {
         $this->ensurePasswordIsConfirmed();
 
-        $this->user->forceFill([
-            'two_factor_recovery_codes' => encrypt(json_encode(Collection::times(8, function () {
-                return $this->twoFactor->generateRecoveryCode();
-            })->all())),
-        ])->save();
+        $this->user->generateRecoveryCodes();
 
         $this->showingRecoveryCodes = true;
     }
@@ -130,11 +117,7 @@ class TwoFactorAuthenticationForm extends Component  implements Forms\Contracts\
     {
         $this->ensurePasswordIsConfirmed();
 
-        $this->user->forceFill([
-            'two_factor_secret' => null,
-            'two_factor_recovery_codes' => null,
-            'two_factor_confirmed_at' => null,
-        ])->save();
+        $this->user->disableTwoFactorAuth();
 
         $this->showingRecoveryCodes = false;
     }
@@ -156,7 +139,7 @@ class TwoFactorAuthenticationForm extends Component  implements Forms\Contracts\
      */
     public function getEnabledProperty()
     {
-        return ! empty($this->user->two_factor_secret);
+        return $this->totp != null || $this->user->hasTwoFactorEnabled();
     }
 
     /**
@@ -166,7 +149,7 @@ class TwoFactorAuthenticationForm extends Component  implements Forms\Contracts\
      */
     public function getConfirmedProperty()
     {
-        return ! empty($this->user->two_factor_confirmed_at);
+        return $this->user->hasTwoFactorEnabled();
     }
 
     public function render()
