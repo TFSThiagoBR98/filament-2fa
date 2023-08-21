@@ -5,10 +5,8 @@ namespace TFSThiagoBR98\FilamentTwoFactor\Http\Livewire\Auth;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use Filament\Facades\Filament;
 use Filament\Forms\ComponentContainer;
-use Filament\Http\Livewire\Auth\Login as FilamentLogin;
+use Filament\Pages\Auth\Login as FilamentLogin;
 use Filament\Http\Responses\Auth\Contracts\LoginResponse as FilamentLoginResponse;
-use Illuminate\Auth\Events\Failed;
-use TFSThiagoBR98\FilamentTwoFactor\FilamentTwoFactor;
 use TFSThiagoBR98\FilamentTwoFactor\Http\Responses\Auth\LoginResponse as TwoFactorLoginResponse;
 
 /**

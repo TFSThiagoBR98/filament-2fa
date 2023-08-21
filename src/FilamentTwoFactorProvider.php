@@ -23,8 +23,8 @@ class FilamentTwoFactorProvider extends PackageServiceProvider
             ->hasRoute('web')
             ->hasViews();
 
-        Livewire::component(Auth\Login::getName(), Auth\Login::class);
-        Livewire::component(Auth\TwoFactorChallenge::getName(), Auth\TwoFactorChallenge::class);
+        Livewire::component('filament-two-factor-page-login', Auth\Login::class);
+        Livewire::component('filament-two-factor-challenge', Auth\TwoFactorChallenge::class);
         Livewire::component('filament-two-factor-form', TwoFactorAuthenticationForm::class);
     }
 
