@@ -7,6 +7,7 @@ use Filament\Forms;
 use Filament\Pages;
 use Filament\Pages\Actions\ButtonAction;
 use Illuminate\Support\Collection;
+use Laragear\TwoFactor\Contracts\TwoFactorAuthenticatable;
 use Livewire\Component;
 use TFSThiagoBR98\FilamentTwoFactor\ConfirmsPasswords;
 use TFSThiagoBR98\FilamentTwoFactor\FilamentTwoFactor;
@@ -124,7 +125,11 @@ class TwoFactorAuthenticationForm extends Component implements Forms\Contracts\H
      */
     public function getUserProperty()
     {
-        return Filament::auth()->user();
+        if ($this->record != null && $this->record instanceof TwoFactorAuthenticatable) {
+            return $this->record;
+        } else {
+            return Filament::auth()->user();
+        }
     }
 
     /**
