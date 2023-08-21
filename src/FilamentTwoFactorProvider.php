@@ -4,13 +4,12 @@ namespace TFSThiagoBR98\FilamentTwoFactor;
 
 use Filament\Facades\Filament;
 use Filament\Navigation\MenuItem;
-use Filament\PluginServiceProvider;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 use TFSThiagoBR98\FilamentTwoFactor\Http\Livewire\Auth;
 use TFSThiagoBR98\FilamentTwoFactor\Http\Livewire\TwoFactorAuthenticationForm;
 use TFSThiagoBR98\FilamentTwoFactor\Pages\TwoFactor;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class FilamentTwoFactorProvider extends PackageServiceProvider
 {
@@ -41,12 +40,5 @@ class FilamentTwoFactorProvider extends PackageServiceProvider
                 ]);
             });
         }
-    }
-
-    protected function getPages(): array
-    {
-        return config('filament-2fa.enable_two_factor_page')
-            ? [TwoFactor::class]
-            : [];
     }
 }

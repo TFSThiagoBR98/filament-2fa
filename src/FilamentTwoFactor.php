@@ -2,10 +2,7 @@
 
 namespace TFSThiagoBR98\FilamentTwoFactor;
 
-use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Cache\Repository;
-use Illuminate\Support\Str;
-use Laragear\TwoFactor\Facades\Auth2FA;
 
 class FilamentTwoFactor
 {
