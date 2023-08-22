@@ -38,6 +38,14 @@ class TwoFactorAuthenticationForm extends Component implements Forms\Contracts\H
      */
     public ?string $code = null;
 
+
+    /**
+     * User record
+     * 
+     * @var mixed
+     */
+    public mixed $record = null;
+
     /**
      * @return array<int,Forms\Components\Component>
      */
