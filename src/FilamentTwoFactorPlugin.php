@@ -27,14 +27,6 @@ class FilamentTwoFactorPlugin implements Plugin
     {
         if (config('filament-2fa.enable_two_factor_page')) {
             $panel = $panel->pages([TwoFactor::class]);
-            if (config('filament-2fa.show_two_factor_page_in_user_menu')) {
-                $panel = $panel->userMenuItems([
-                    MenuItem::make()
-                        ->label(__('filament-2fa::two-factor.navigation_label'))
-                        ->url(TwoFactor::getUrl())
-                        ->icon('heroicon-s-lock-closed'),
-                ]);
-            }
         }
 
         $panel = $panel->routes(function () {
@@ -45,7 +37,14 @@ class FilamentTwoFactorPlugin implements Plugin
 
     public function boot(Panel $panel): void
     {
-        //
+        if (config('filament-2fa.enable_two_factor_page') && config('filament-2fa.show_two_factor_page_in_user_menu')) {
+            $panel = $panel->userMenuItems([
+                MenuItem::make()
+                    ->label(__('filament-2fa::two-factor.navigation_label'))
+                    ->url(TwoFactor::getUrl())
+                    ->icon('heroicon-s-lock-closed'),
+            ]);
+        }
     }
 
     public static function get(): Plugin | FilamentManager

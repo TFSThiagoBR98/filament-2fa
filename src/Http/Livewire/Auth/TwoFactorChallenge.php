@@ -6,13 +6,15 @@ namespace TFSThiagoBR98\FilamentTwoFactor\Http\Livewire\Auth;
 
 use Filament\Facades\Filament;
 use Filament\Forms;
+use Filament\Pages\Concerns\InteractsWithFormActions;
 use Filament\Http\Responses\Auth\Contracts\LoginResponse;
 use Illuminate\Contracts\View\View;
-use Livewire\Component;
+use Illuminate\Contracts\Support\Htmlable;
+use Filament\Pages\SimplePage;
 
-class TwoFactorChallenge extends Component implements Forms\Contracts\HasForms
+class TwoFactorChallenge extends SimplePage
 {
-    use Forms\Concerns\InteractsWithForms;
+    use InteractsWithFormActions;
 
     public ?string $code = null;
     public ?string $recovery_code = null;
@@ -191,6 +193,16 @@ class TwoFactorChallenge extends Component implements Forms\Contracts\HasForms
         request()->session()->regenerate();
 
         return app(LoginResponse::class);
+    }
+
+    public function getTitle(): string | Htmlable
+    {
+        return __('filament-panels::pages/auth/login.title');
+    }
+
+    public function getHeading(): string | Htmlable
+    {
+        return __('filament-panels::pages/auth/login.heading');
     }
 
     public function render(): View
