@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TFSThiagoBR98\FilamentTwoFactor\Http\Livewire\Auth;
 
 use Filament\Facades\Filament;
@@ -12,8 +14,8 @@ class TwoFactorChallenge extends Component implements Forms\Contracts\HasForms
 {
     use Forms\Concerns\InteractsWithForms;
 
-    public $code;
-    public $recovery_code;
+    public ?string $code;
+    public ?string $recovery_code;
     public bool $isRecovery = false;
 
     /**
@@ -28,9 +30,12 @@ class TwoFactorChallenge extends Component implements Forms\Contracts\HasForms
      *
      * @var bool
      */
-    protected $remember;
+    protected ?bool $remember;
 
-    public function mount()
+    /**
+     * @return void
+     */
+    public function mount(): void
     {
         $user = $this->challengedUser();
         if (! $user->hasTwoFactorEnabled() ) {
@@ -38,6 +43,9 @@ class TwoFactorChallenge extends Component implements Forms\Contracts\HasForms
         }
     }
 
+    /**
+     * @return array<int,Forms\Components\TextInput>
+     */
     protected function getCodeFormSchema(): array
     {
         return [
@@ -47,6 +55,9 @@ class TwoFactorChallenge extends Component implements Forms\Contracts\HasForms
         ];
     }
 
+    /**
+     * @return array<int,Forms\Components\TextInput>
+     */
     protected function getRecoveryFormSchema(): array
     {
         return [
@@ -56,6 +67,9 @@ class TwoFactorChallenge extends Component implements Forms\Contracts\HasForms
         ];
     }
 
+    /**
+     * @return array<string,Forms\Form>
+     */
     protected function getForms(): array
     {
         return [
@@ -66,7 +80,10 @@ class TwoFactorChallenge extends Component implements Forms\Contracts\HasForms
         ];
     }
 
-    public function hasChallengedUser()
+    /**
+     * @return bool
+     */
+    public function hasChallengedUser(): bool
     {
         if ($this->challengedUser) {
             return true;
@@ -83,7 +100,7 @@ class TwoFactorChallenge extends Component implements Forms\Contracts\HasForms
      *
      * @return mixed
      */
-    public function challengedUser()
+    public function challengedUser(): mixed
     {
         if ($this->challengedUser) {
             return $this->challengedUser;
@@ -104,7 +121,7 @@ class TwoFactorChallenge extends Component implements Forms\Contracts\HasForms
      *
      * @return bool
      */
-    public function hasValidCode()
+    public function hasValidCode(): bool
     {
         return $this->code && tap($this->challengedUser()->validateTwoFactorCode(
             $this->code
@@ -121,12 +138,12 @@ class TwoFactorChallenge extends Component implements Forms\Contracts\HasForms
     /**
      * Get the valid recovery code if one exists on the request.
      *
-     * @return string|void
+     * @return bool
      */
-    public function validRecoveryCode()
+    public function validRecoveryCode(): bool
     {
         if (! $this->recovery_code) {
-            return;
+            return false;
         }
 
         return tap($this->challengedUser()->validateTwoFactorCode(
@@ -146,7 +163,7 @@ class TwoFactorChallenge extends Component implements Forms\Contracts\HasForms
      *
      * @return bool
      */
-    public function remember()
+    public function remember(): bool
     {
         if (! $this->remember) {
             $this->remember = request()->session()->pull('login.remember', false);
@@ -155,7 +172,10 @@ class TwoFactorChallenge extends Component implements Forms\Contracts\HasForms
         return $this->remember;
     }
 
-    public function verify()
+    /**
+     * @return null|LoginResponse
+     */
+    public function verify(): ?LoginResponse
     {
         $user = $this->challengedUser();
         $this->validate();

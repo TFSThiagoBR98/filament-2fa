@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TFSThiagoBR98\FilamentTwoFactor\Pages;
 
 use Filament\Pages\Page;

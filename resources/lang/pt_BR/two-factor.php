@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'title' => 'Autenticação de Dois Fatores',
     'description' => 'Adicione segurança adicional à sua conta usando autenticação de dois fatores.',

@@ -1,16 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TFSThiagoBR98\FilamentTwoFactor\Http\Livewire;
 
 use Filament\Facades\Filament;
 use Filament\Forms;
-use Filament\Pages;
-use Filament\Pages\Actions\ButtonAction;
-use Illuminate\Support\Collection;
 use Laragear\TwoFactor\Contracts\TwoFactorAuthenticatable;
+use Laragear\TwoFactor\Models\TwoFactorAuthentication;
 use Livewire\Component;
+use Illuminate\Contracts\View\View;
 use TFSThiagoBR98\FilamentTwoFactor\ConfirmsPasswords;
-use TFSThiagoBR98\FilamentTwoFactor\FilamentTwoFactor;
 
 class TwoFactorAuthenticationForm extends Component implements Forms\Contracts\HasForms
 {
@@ -22,22 +22,25 @@ class TwoFactorAuthenticationForm extends Component implements Forms\Contracts\H
      *
      * @var bool
      */
-    public $showingRecoveryCodes = false;
+    public bool $showingRecoveryCodes = false;
 
     /**
      * The two factor authentication provider.
      *
      * @var \Laragear\TwoFactor\Models\TwoFactorAuthentication
      */
-    public $totp;
+    public ?TwoFactorAuthentication $totp;
 
     /**
      * The OTP code for confirming two factor authentication.
      *
      * @var string|null
      */
-    public $code;
+    public ?string $code;
 
+    /**
+     * @return array<int,Forms\Components\Component>
+     */
     protected function getFormSchema(): array
     {
         return [
@@ -52,7 +55,7 @@ class TwoFactorAuthenticationForm extends Component implements Forms\Contracts\H
      *
      * @return void
      */
-    public function enableTwoFactorAuthentication()
+    public function enableTwoFactorAuthentication(): void
     {
         $this->ensurePasswordIsConfirmed();
 
@@ -64,7 +67,7 @@ class TwoFactorAuthenticationForm extends Component implements Forms\Contracts\H
      *
      * @return void
      */
-    public function confirmTwoFactorAuthentication()
+    public function confirmTwoFactorAuthentication(): void
     {
         $this->ensurePasswordIsConfirmed();
 
@@ -84,7 +87,7 @@ class TwoFactorAuthenticationForm extends Component implements Forms\Contracts\H
      *
      * @return void
      */
-    public function showRecoveryCodes()
+    public function showRecoveryCodes(): void
     {
         $this->ensurePasswordIsConfirmed();
         $this->showingRecoveryCodes = true;
@@ -95,7 +98,7 @@ class TwoFactorAuthenticationForm extends Component implements Forms\Contracts\H
      *
      * @return void
      */
-    public function regenerateRecoveryCodes()
+    public function regenerateRecoveryCodes(): void
     {
         $this->ensurePasswordIsConfirmed();
 
@@ -109,7 +112,7 @@ class TwoFactorAuthenticationForm extends Component implements Forms\Contracts\H
      *
      * @return void
      */
-    public function disableTwoFactorAuthentication()
+    public function disableTwoFactorAuthentication(): void
     {
         $this->ensurePasswordIsConfirmed();
 
@@ -137,7 +140,7 @@ class TwoFactorAuthenticationForm extends Component implements Forms\Contracts\H
      *
      * @return bool
      */
-    public function getEnabledProperty()
+    public function getEnabledProperty(): bool
     {
         return $this->totp != null || $this->user->hasTwoFactorEnabled();
     }
@@ -147,12 +150,12 @@ class TwoFactorAuthenticationForm extends Component implements Forms\Contracts\H
      *
      * @return bool
      */
-    public function getConfirmedProperty()
+    public function getConfirmedProperty(): bool
     {
         return $this->user->hasTwoFactorEnabled();
     }
 
-    public function render()
+    public function render(): View 
     {
         return view('filament-2fa::livewire.two-factor-authentication-form');
     }
