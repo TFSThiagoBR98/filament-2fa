@@ -6,6 +6,7 @@ namespace TFSThiagoBR98\FilamentTwoFactor\Http\Livewire;
 
 use Filament\Facades\Filament;
 use Filament\Forms;
+use Filament\Notifications\Notification;
 use Laragear\TwoFactor\Contracts\TwoFactorAuthenticatable;
 use Laragear\TwoFactor\Models\TwoFactorAuthentication;
 use Livewire\Component;
@@ -38,10 +39,9 @@ class TwoFactorAuthenticationForm extends Component implements Forms\Contracts\H
      */
     public ?string $code = null;
 
-
     /**
      * User record
-     * 
+     *
      * @var mixed
      */
     public mixed $record = null;
@@ -54,6 +54,7 @@ class TwoFactorAuthenticationForm extends Component implements Forms\Contracts\H
         return [
             Forms\Components\TextInput::make('code')
                 ->label(__('filament-2fa::two-factor.field.code'))
+                ->numeric()
                 ->rules('nullable|string'),
         ];
     }
@@ -68,6 +69,7 @@ class TwoFactorAuthenticationForm extends Component implements Forms\Contracts\H
         $this->ensurePasswordIsConfirmed();
 
         $this->totp = $this->user->createTwoFactorAuth();
+        $this->totp->save();
     }
 
     /**
@@ -80,7 +82,11 @@ class TwoFactorAuthenticationForm extends Component implements Forms\Contracts\H
         $this->ensurePasswordIsConfirmed();
 
         if (empty($this->code) || !$this->user->confirmTwoFactorAuth($this->code)) {
-            $this->addError('code', __('filament-2fa::two-factor.message.invalid_code'));
+            Notification::make()
+                ->title(__('filament-2fa::two-factor.message.invalid_code'))
+                ->body(null)
+                ->danger()
+                ->send();
 
             return;
         }
@@ -163,7 +169,7 @@ class TwoFactorAuthenticationForm extends Component implements Forms\Contracts\H
         return $this->user->hasTwoFactorEnabled();
     }
 
-    public function render(): View 
+    public function render(): View
     {
         return view('filament-2fa::livewire.two-factor-authentication-form');
     }

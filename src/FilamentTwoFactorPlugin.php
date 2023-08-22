@@ -9,6 +9,7 @@ use Filament\FilamentManager;
 use Filament\Navigation\MenuItem;
 use Filament\Panel;
 use TFSThiagoBR98\FilamentTwoFactor\Pages\TwoFactor;
+use Illuminate\Support\Facades\Route;
 
 class FilamentTwoFactorPlugin implements Plugin
 {
@@ -32,10 +33,14 @@ class FilamentTwoFactorPlugin implements Plugin
                         ->label(__('filament-2fa::two-factor.navigation_label'))
                         ->url(TwoFactor::getUrl())
                         ->icon('heroicon-s-lock-closed'),
-                ])
+                ]);
             }
         }
 
+        $panel = $panel->routes(function () {
+            Route::get('/two-factor-challenge', config('filament-2fa.two_factor_challenge_component_path'))
+                ->name('filament-2fa.login');
+        });
     }
 
     public function boot(Panel $panel): void
