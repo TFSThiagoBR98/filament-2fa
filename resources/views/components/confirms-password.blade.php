@@ -25,22 +25,17 @@
         </p>
 
         <div class="mt-4" x-data="{}" x-on:confirming-password.window="setTimeout(() => $refs.confirmable_password.focus(), 250)">
-            <input @class([
-                "block w-full transition duration-75 rounded-lg shadow-sm focus:border-primary-600 focus:ring-1 focus:ring-inset focus:ring-primary-600 disabled:opacity-70",
-                'dark:bg-gray-700 dark:text-white' => config('forms.dark_mode'),
-                'border-gray-300' => ! $errors->has('confirmable_password'),
-                'dark:border-gray-600' => (! $errors->has('confirmable_password')) && config('forms.dark_mode'),
-                'border-danger-600 ring-danger-600' => $errors->has('confirmable_password'),
-                   ])
-                   type="password"
-                   placeholder="{{ __('filament-2fa::two-factor.field.password') }}"
-                   x-ref="confirmable_password"
-                   wire:model.defer="confirmablePassword"
-                   wire:keydown.enter="confirmPassword" />
-
-            @error('confirmable_password')
-            <p class="text-sm text-danger-600 filament-forms-field-wrapper-error-message ">{{ $message }}</p>
-            @enderror
+            <x-filament-forms::field-wrapper>
+                <x-filament::input.wrapper :valid="! $errors->has('confirmable_password')">
+                    <x-filament::input
+                        type="password"
+                        placeholder="{{ __('filament-2fa::two-factor.field.password') }}"
+                        wire:model="confirmablePassword"
+                        x-ref="confirmable_password"
+                        wire:keydown.enter="confirmPassword"
+                        />
+                </x-filament::input.wrapper>
+            </x-filament-forms::field-wrapper>
         </div>
 
         <x-slot name="footer">

@@ -8,13 +8,17 @@ use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Pages\Concerns\InteractsWithFormActions;
 use Filament\Http\Responses\Auth\Contracts\LoginResponse;
-use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\Support\Htmlable;
 use Filament\Pages\SimplePage;
 
 class TwoFactorChallenge extends SimplePage
 {
     use InteractsWithFormActions;
+
+    /**
+     * @var view-string
+     */
+    protected static string $view = 'filament-2fa::two-factor-challenge';
 
     public ?string $code = null;
     public ?string $recovery_code = null;
@@ -197,22 +201,11 @@ class TwoFactorChallenge extends SimplePage
 
     public function getTitle(): string | Htmlable
     {
-        return __('filament-panels::pages/auth/login.title');
+        return __('filament-2fa::two-factor.title');
     }
 
     public function getHeading(): string | Htmlable
     {
         return __('filament-panels::pages/auth/login.heading');
-    }
-
-    public function render(): View
-    {
-        $view = view('filament-2fa::two-factor-challenge');
-
-        $view->layout('filament::components.layouts.base', [
-            'title' => __('filament-2fa::two-factor.title'),
-        ]);
-
-        return $view;
     }
 }
