@@ -41,17 +41,13 @@ trait ConfirmsPasswords
         $this->resetErrorBag();
 
         if ($this->passwordIsConfirmed()) {
-            return $this->dispatch('password-confirmed', [
-                'id' => $confirmableId,
-            ]);
+            return $this->dispatch('password-confirmed', id: $confirmableId);
         }
 
         $this->confirmingPassword = true;
         $this->confirmableId = $confirmableId;
         $this->confirmablePassword = '';
-        $this->dispatch('open-modal', [
-            'id' => 'confirm-password',
-        ]);
+        $this->dispatch('open-modal', id: 'confirm-password');
 
         $this->dispatch('confirming-password');
     }
@@ -66,9 +62,7 @@ trait ConfirmsPasswords
         $this->confirmingPassword = false;
         $this->confirmableId = null;
         $this->confirmablePassword = '';
-        $this->dispatch('close-modal', [
-            'id' => 'confirm-password',
-        ]);
+        $this->dispatch('close-modal', id: 'confirm-password');
     }
 
     /**
@@ -90,9 +84,7 @@ trait ConfirmsPasswords
 
         session(['auth.password_confirmed_at' => time()]);
 
-        $this->dispatch('password-confirmed', [
-            'id' => $this->confirmableId,
-        ]);
+        $this->dispatch('password-confirmed', id: $this->confirmableId);
 
         $this->stopConfirmingPassword();
     }
