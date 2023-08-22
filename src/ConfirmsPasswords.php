@@ -36,7 +36,7 @@ trait ConfirmsPasswords
      * @param  string  $confirmableId
      * @return mixed
      */
-    public function startConfirmingPassword(string $confirmableId): mixed
+    public function startConfirmingPassword(string $confirmableId)
     {
         $this->resetErrorBag();
 

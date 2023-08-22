@@ -25,7 +25,13 @@ class FilamentTwoFactor
         $this->cache = $cache;
     }
 
-    public function hasTwoFactorEnabled(mixed $user): mixed
+    /**
+     * Check if a model has totp enabled
+     *
+     * @param mixed $user
+     * @return boolean
+     */
+    public function hasTwoFactorEnabled(mixed $user): bool
     {
         return optional($user)->hasTwoFactorEnabled();
     }
