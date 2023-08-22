@@ -14,8 +14,8 @@ class TwoFactorChallenge extends Component implements Forms\Contracts\HasForms
 {
     use Forms\Concerns\InteractsWithForms;
 
-    public ?string $code;
-    public ?string $recovery_code;
+    public ?string $code = null;
+    public ?string $recovery_code = null;
     public bool $isRecovery = false;
 
     /**
@@ -30,7 +30,7 @@ class TwoFactorChallenge extends Component implements Forms\Contracts\HasForms
      *
      * @var bool
      */
-    protected ?bool $remember;
+    protected bool $remember = false;
 
     /**
      * @return void

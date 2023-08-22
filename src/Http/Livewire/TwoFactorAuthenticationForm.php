@@ -29,14 +29,14 @@ class TwoFactorAuthenticationForm extends Component implements Forms\Contracts\H
      *
      * @var \Laragear\TwoFactor\Models\TwoFactorAuthentication
      */
-    public ?TwoFactorAuthentication $totp;
+    public ?TwoFactorAuthentication $totp = null;
 
     /**
      * The OTP code for confirming two factor authentication.
      *
      * @var string|null
      */
-    public ?string $code;
+    public ?string $code = null;
 
     /**
      * @return array<int,Forms\Components\Component>

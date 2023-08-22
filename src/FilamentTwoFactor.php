@@ -13,7 +13,7 @@ class FilamentTwoFactor
      *
      * @var \Illuminate\Contracts\Cache\Repository|null
      */
-    protected ?Repository $cache;
+    protected ?Repository $cache = null;
 
     /**
      * Create a new two factor authentication provider instance.
