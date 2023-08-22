@@ -18,7 +18,6 @@ class FilamentTwoFactorProvider extends PackageServiceProvider
     {
         $package
             ->name(name: static::$name)
-            ->hasRoute('web')
             ->hasTranslations()
             ->hasViews();
     }
