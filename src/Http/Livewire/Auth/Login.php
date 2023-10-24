@@ -7,6 +7,8 @@ namespace TFSThiagoBR98\FilamentTwoFactor\Http\Livewire\Auth;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use Filament\Facades\Filament;
 use Filament\Forms\ComponentContainer;
+use Filament\Forms\Components\Component;
+use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Pages\Auth\Login as FilamentLogin;
 use Filament\Http\Responses\Auth\Contracts\LoginResponse as FilamentLoginResponse;
@@ -45,6 +47,11 @@ class Login extends FilamentLogin
         $model = Filament::auth()->getProvider()->getModel();
         $this->user = $model::where('email', $data['email'])->first();
 
+        // Alternative Tax Number Login
+        if ($this->user == null) {
+            $this->user = $model::where('tax_number', $data['email'])->first();
+        }
+
         if ( ! $this->validateCredentials($data)) {
             return null;
         }
@@ -73,5 +80,15 @@ class Login extends FilamentLogin
         }
 
         return true;
+    }
+
+    protected function getEmailFormComponent(): Component
+    {
+        return TextInput::make('email')
+            ->label(__('filament-panels::pages/auth/login.form.email.label'))
+            ->required()
+            ->autocomplete()
+            ->autofocus()
+            ->extraInputAttributes(['tabindex' => 1]);
     }
 }
