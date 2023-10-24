@@ -85,7 +85,7 @@ class Login extends FilamentLogin
     protected function getEmailFormComponent(): Component
     {
         return TextInput::make('email')
-            ->label(__('filament-panels::pages/auth/login.form.email.label'))
+            ->label('CPF ou E-mail')
             ->required()
             ->autocomplete()
             ->autofocus()
