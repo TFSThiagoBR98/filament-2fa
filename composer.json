@@ -21,11 +21,11 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "ext-json": "*",
-        "spatie/laravel-package-tools": "^1.16",
-        "filament/filament": "^3.0",
-        "laragear/two-factor": "^2.0"
+        "spatie/laravel-package-tools": "^1.19",
+        "filament/filament": "^3.3",
+        "laragear/two-factor": "^3.0"
     },
     "require-dev": {
     },
