@@ -49,7 +49,7 @@ class Login extends FilamentLogin
 
         // Alternative Tax Number Login
         if ($this->user == null) {
-            $this->user = $model::where('tax_number', $data['email'])->first();
+            $this->user = $model::where('tax_id', $data['email'])->first();
         }
 
         if ( ! $this->validateCredentials($data)) {
